@@ -14,7 +14,9 @@ def pc_trace(filename):
     with open(filename) as f:
         for line in f:
             tokens = line.strip().split(":")
-            if tokens[0] == "m_pc_plus_one":
+            if tokens[0] == "time":
+                print "TIME", tokens[1]
+            elif tokens[0] == "m_pc_plus_one":
                 print "PC+1", tokens[1]
             elif tokens[0] == "m_imem_out":
                 print "INSN", tokens[1]
