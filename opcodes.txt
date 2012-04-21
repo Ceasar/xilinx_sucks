@@ -1,0 +1,13 @@
+`define BRANCH  4'b0000
+`define ARITH   4'b0001
+`define COMPARE 4'b0010
+`define JSR     4'b0100
+`define BOOL    4'b0101
+`define LOAD    4'b0110
+`define STORE   4'b0111
+`define RTI     4'b1000
+`define CONST   4'b1001
+`define SHIFT   4'b1010
+`define JUMP    4'b1100
+`define HICONST 4'b1101
+`define TRAP    4'b1111
