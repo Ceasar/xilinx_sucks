@@ -2,6 +2,9 @@ file = File.new(ARGV[0], "r")
 
 imem_out_regex = /(^.*?)imem_out: (\d+)$/
 
+
+general_regex = /(^.*): (\d+)$/
+
 def replace(insn, r)
   if insn == "0000"
     (r == "000000000000") ? "NOP" : "BRANCH #{r[0..3]} #{r[4..15]}" + "\t\t\t #{insn} #{r}"
@@ -37,6 +40,15 @@ while line = file.gets
   if !match.nil?
     puts "#{match[1]}imem_out: #{replace(match[2][0..3], match[2][4..15])}"
   else
-    puts line
+    match = general_regex.match(line)
+    if !match.nil?
+        if !line.include? "opcode" and line.include? "pc"
+            puts "#{match[1]}: #{match[2].to_i(2).to_s(16)}"
+        else
+            puts line
+        end
+    else
+        puts line
+    end
   end 
 end
