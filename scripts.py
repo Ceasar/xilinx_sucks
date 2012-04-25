@@ -7,7 +7,11 @@ from wires import get_inputs, get_outputs, get_wires
 def generate_debug(filename):
     """Generate print statements for every wire in a file."""
     for wire in chain(get_inputs(filename), get_outputs(filename), get_wires(filename)):
-        print '$display("%s: %%b", %s);' % (wire, wire)
+        # try to automatically format pc wires to use hex values
+        if "pc" in wire and "opcode" not in wire:
+            print '$display("%s: %%h", %s);' % (wire, wire)
+        else:
+            print '$display("%s: %%b", %s);' % (wire, wire)
 
 
 def pc_trace(filename):
